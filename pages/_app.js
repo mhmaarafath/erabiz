@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }) {
         <AuthContextProvider>
           <MessageContextProvider>
             <ThemeProvider theme={mdTheme}>
-              <AdminPanel title={pageProps.title ?? 'NH App'}>
+              <AdminPanel title={pageProps.title ?? 'Erabiz'}>
                 <Component {...pageProps} />
               </AdminPanel>
             </ThemeProvider>
