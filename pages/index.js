@@ -50,22 +50,25 @@ import { Padding } from '@mui/icons-material';
 
 const Doctor = ({doctor, onClick}) => {
   return (
-    <Box
+    <Box item
       onClick={onClick}
       sx={{
-        width: '33%',
         display: 'flex',
+        padding: 2,
+        borderBottom: '1px solid',
+        borderLeft: '1px solid',
         flexDirection: 'column',
         alignItems: 'center',
+        justifyContent: 'center',
+        gap: 1,
         "&:hover": {
-          // width: '66%',
           backgroundColor: 'lightblue',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          columnSpan: 2,
         },
       }} 
     >
-      <Avatar src={doctor.avatar} sx={{ m: 1, bgcolor: 'secondary.main', width:'100px', height: '100px'}} />
-      {console.log(doctor)}
+      <Avatar src={doctor.avatar} sx={{ m: 1, width:'40%', height: 'auto'}} />
       <Typography variant="h6">{doctor.name}</Typography>
       <Typography variant="p">{doctor.speciality.name}</Typography>
     </Box>
@@ -183,14 +186,23 @@ export default function Home() {
 
   return (
         <>
-          <Grid container sx={{height: '100vh'}}>
-            <CssBaseline />
-            <Grid item xs={12} md={7}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',            
-                    }}>
+          <Box sx={{display:'flex', justifyContent: 'right', padding: 2}}>
+            <Link href='/auth/appointments'><Typography sx={{backgroundColor: 'black', color: 'white', padding: 2, textDecoration: 'none'}}>Adming Panel</Typography></Link>
+          </Box>
+
+          <Box sx={{display:'flex', gap: 2, marginY: 2, flexDirection: 'column', alignItems: 'center'}}>
+            <Typography variant='h4'>Search Doctor, Make an Appointment</Typography>
+            <Typography variant='h6'>Discover the best doctors, clinic & hospital the city nearest to you</Typography>
+          </Box>
+        
+          <Box sx={{borderTop:'1px solid'}}>
+            <Box sx={{display: 'grid', gridTemplateColumns: 'auto auto'}}>
+              <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',  
+                    marginTop: 5,          
+                  }}>
                 <Box 
                   sx={{width: '50%'}}
                 >
@@ -266,29 +278,21 @@ export default function Home() {
                       )}
                     />
                 </Box>
+              </Box>
 
-            </Grid>
+              <Box>
+                <Box sx={{display: 'grid', gridTemplateColumns: 'auto auto auto'}}>
+                    {
+                    doctors && doctors.map(doctor => 
+                      <Doctor 
+                        onClick={()=> setDoctorId(doctor.id)} key={doctor.id} doctor={doctor}/>
+                    )}
+                </Box>
+              </Box>
 
-            <Grid item xs={12} md={5}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',            
-            }}>
-              
-              <Box sx={{
-                        display: 'flex',
-                        width: '100%',
-                        flexWrap: 'wrap'
-                      }}>
-                      {
-                      doctors && doctors.map(doctor => 
-                        <Doctor 
-                          onClick={()=> setDoctorId(doctor.id)} key={doctor.id} doctor={doctor}/>
-                      )}
-                      </Box>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
+          
 
 
 
@@ -315,7 +319,7 @@ export default function Home() {
             <List>
               {doctor && doctor.schedules && doctor.schedules.map(schedule => (
                   <>
-                    <ListItem onClick={()=>setScheduleId(schedule.id)}>
+                    <ListItem sx={{cursor: 'pointer'}} onClick={()=>setScheduleId(schedule.id)}>
                       <ListItemText primary={`${schedule.hospital.name} - ${schedule.hospital.state.name}`} secondary={`${schedule.day} - ${schedule.start} - ${schedule.end}`} />
                     </ListItem>
                     <Divider />

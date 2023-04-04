@@ -138,7 +138,7 @@ export default function AdminPanel({children, title}){
             px: [1],
           }}
         >
-            {/*<LinkItem icon={<DashboardIcon/>} path='dashboard' text='Muuzo'/>*/}
+          <LinkItem  path='../' text='Visit Site'/>
           <IconButton onClick={toggleDrawer}>
             <ChevronLeftIcon />
           </IconButton>
@@ -203,9 +203,9 @@ export default function AdminPanel({children, title}){
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-              <MenuItem onClick={logout}>
+              {/* <MenuItem onClick={logout}>
                 <Typography textAlign="center">Logout</Typography>
-              </MenuItem>
+              </MenuItem> */}
           </Menu>
 
         </Toolbar>

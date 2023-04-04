@@ -19,6 +19,7 @@ import PrivacyTipIcon from '@mui/icons-material/PrivacyTip';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
+import { BookOnline, CalendarMonth, LocalHospital, MedicationLiquid } from "@mui/icons-material";
 
 export const LinkItem = ({ path, text, icon }) => {
   return (
@@ -43,9 +44,10 @@ export const secondaryListItems = (
     <ListSubheader component="div" inset>
       {/*Crud Functionalities*/}
     </ListSubheader>
-      <LinkItem icon={<LibraryMusicIcon/>} path='doctors' text='Doctors'/>
+      <LinkItem icon={<BookOnline/>} path='appointments' text='Appointments'/>
+      <LinkItem icon={<MedicationLiquid/>} path='doctors' text='Doctors'/>
       <LinkItem icon={<LibraryMusicIcon/>} path='specialities' text='Specialities'/>
-      <LinkItem icon={<LibraryMusicIcon/>} path='hospitals' text='Hospitals'/>
-      <LinkItem icon={<LibraryMusicIcon/>} path='schedules' text='Schedules'/>
+      <LinkItem icon={<LocalHospital/>} path='hospitals' text='Hospitals'/>
+      <LinkItem icon={<CalendarMonth/>} path='schedules' text='Schedules'/>
   </React.Fragment>
 );
