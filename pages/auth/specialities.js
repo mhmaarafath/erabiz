@@ -49,9 +49,5 @@ export default function specialities() {
     )
 }
 
-export async function getServerSideProps({req, res}) {
-  return tableData(req, 'specialities')
-}
-
 
 
