@@ -64,9 +64,9 @@ export default function doctors() {
     )
 }
 
-export async function getServerSideProps({req, res}) {
-  return tableData(req, 'doctors')
-}
+// export async function getServerSideProps({req, res}) {
+//   return tableData(req, 'doctors')
+// }
 
 
 
