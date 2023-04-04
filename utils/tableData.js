@@ -5,7 +5,7 @@ const tableData = async (req, crud)=>{
   return { 
     props: {
       data : data.data,
-      title : crud.toUpperCase()
+      // title : crud.toUpperCase()
     }
   }
 }

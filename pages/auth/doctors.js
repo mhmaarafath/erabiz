@@ -4,8 +4,28 @@ import tableData from '@/utils/tableData';
 import Modal from "@/components/Modal";
 import FormGrid from '@/components/Form/FormGrid';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import axios from '@/utils/axios';
 
-export default function doctors({data}) {
+export default function doctors() {
+
+  const [data, setData] = useState([]);
+  // const [page, setPage] = useState(1);
+  // const countPerPage = 10;
+ 
+  const getData = () => {
+      axios().get(`doctors`).then(response => {
+      setData(response.data)
+    }).catch(err => {
+      setData([]);
+    });
+  }
+ 
+  useEffect(() => {
+    getData();
+  }, []);
+
+
   const columns = [
     {
         name: 'Id',
@@ -32,7 +52,7 @@ export default function doctors({data}) {
 
   return (
       <>
-        <Table columns={columns} crud='doctors' data={data.doctors}/>
+        {data.doctors && <Table columns={columns} crud='doctors' data={data.doctors}/>}
         <Modal data={data.doctors}>
             <FormGrid type='text' name='name' label='Name *'/>
             <FormGrid type='select' name='speciality_id' label='Speciality *' options={data.specialities}/>
