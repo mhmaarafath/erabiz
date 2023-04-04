@@ -4,8 +4,22 @@ import tableData from '@/utils/tableData';
 import Modal from "@/components/Modal";
 import FormGrid from '@/components/Form/FormGrid';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import axios from '@/utils/axios';
 
-export default function specialities({data}) {
+export default function specialities() {
+  const [data, setData] = useState([]);
+ 
+  const getData = () => {
+      axios().get(`specialities`).then(response => {
+      setData(response.data)
+    })
+  }
+ 
+  useEffect(() => {
+    getData();
+  }, []);
+
   const columns = [
     {
         name: 'Id',
@@ -27,7 +41,7 @@ export default function specialities({data}) {
 
   return (
       <>
-        <Table columns={columns} crud='specialities' data={data.specialities}/>
+        {data.specialities && <Table columns={columns} crud='specialities' data={data.specialities}/>}
         <Modal data={data.specialities}>
             <FormGrid type='text' name='name' label='Name *'/>
         </Modal>

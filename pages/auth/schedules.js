@@ -4,9 +4,24 @@ import tableData from '@/utils/tableData';
 import Modal from "@/components/Modal";
 import FormGrid from '@/components/Form/FormGrid';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import axios from '@/utils/axios';
 
-export default function schedules({data}) {
+export default function schedules() {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+  const [data, setData] = useState([]);
+ 
+  const getData = () => {
+      axios().get(`schedules`).then(response => {
+      setData(response.data)
+    })
+  }
+ 
+  useEffect(() => {
+    getData();
+  }, []);
+
   const columns = [
     {
         name: 'Id',
@@ -38,7 +53,7 @@ export default function schedules({data}) {
 
   return (
       <>
-        <Table columns={columns} crud='schedules' data={data.schedules}/>
+        {data.schedules && <Table columns={columns} crud='schedules' data={data.schedules}/>}
         <Modal data={data.schedules}>
             <FormGrid type='autocomplete' options={data.doctors} name='doctor_id' label='Doctor *'/>
             <FormGrid type='autocomplete' options={data.hospitals} name='hospital_id' label='Hospital *'/>
@@ -51,9 +66,6 @@ export default function schedules({data}) {
     )
 }
 
-export async function getServerSideProps({req, res}) {
-  return tableData(req, 'schedules')
-}
 
 
 

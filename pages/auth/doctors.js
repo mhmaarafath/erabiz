@@ -10,15 +10,11 @@ import axios from '@/utils/axios';
 export default function doctors() {
 
   const [data, setData] = useState([]);
-  // const [page, setPage] = useState(1);
-  // const countPerPage = 10;
  
   const getData = () => {
       axios().get(`doctors`).then(response => {
       setData(response.data)
-    }).catch(err => {
-      setData([]);
-    });
+    })
   }
  
   useEffect(() => {
@@ -63,10 +59,4 @@ export default function doctors() {
       </>
     )
 }
-
-// export async function getServerSideProps({req, res}) {
-//   return tableData(req, 'doctors')
-// }
-
-
 
